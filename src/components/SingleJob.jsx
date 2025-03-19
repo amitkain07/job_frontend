@@ -17,7 +17,7 @@ const SingleJob = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const token = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("token");
         const res = await axios.get(
           `https://job-backend-smoky.vercel.app/api/v1/jobs/${id}`,
           {
@@ -37,7 +37,8 @@ const SingleJob = () => {
 
   const handleDelete = async () => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Unauthorized: No token found");
       await axios.delete(
         `https://job-backend-smoky.vercel.app/api/v1/jobs/${id}`,
         {
@@ -46,7 +47,7 @@ const SingleJob = () => {
       );
 
       setData(null);
-      navigate("/"); // Redirect user to the jobs page
+      navigate("/dashboard"); // Redirect user to the jobs page
     } catch (error) {
       console.log(error.message);
     }
@@ -55,7 +56,7 @@ const SingleJob = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("token");
       const res = await axios.patch(
         `https://job-backend-smoky.vercel.app/api/v1/jobs/${id}`,
         { company, position },
@@ -77,7 +78,7 @@ const SingleJob = () => {
           <p className="text-lg text-gray-600 mt-2">{data.job.position}</p>
 
           <div className="flex items-center gap-4 mt-6">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 cursor-pointer">
               Apply Here
             </button>
             <button

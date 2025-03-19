@@ -9,7 +9,8 @@ const Job = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Unauthorized: No token found");
       const res = await axios.post(
         "https://job-backend-smoky.vercel.app/api/v1/jobs",
         {

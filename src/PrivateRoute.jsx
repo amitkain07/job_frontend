@@ -1,9 +1,21 @@
-import { Navigate } from "react-router-dom";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-const PrivateRoute = ({ element }) => {
-  const isAuthenticated = localStorage.getItem("jwtToken"); // Replace with real auth check
+const PrivateRoute = () => {
+  const token = localStorage.getItem("token");
 
-  return isAuthenticated ? element : <Navigate to="/login" replace />;
+  const isTokenValid = () => {
+    if (!token) return false;
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.exp * 1000 > Date.now();
+    } catch (error) {
+      return false;
+    }
+  };
+
+  return isTokenValid() ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

@@ -11,7 +11,8 @@ const Home = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const token = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Unauthorized: No token found");
         const res = await axios.get(
           "https://job-backend-smoky.vercel.app/api/v1/jobs",
           {

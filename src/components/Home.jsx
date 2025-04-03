@@ -36,8 +36,9 @@ const Home = () => {
     return <div className="text-center text-red-500 mt-5">{error}</div>;
 
   return (
-    <div className="p-6">
+    <div className="p-6 relative">
       <h2 className="text-2xl font-semibold text-center mb-6">Job Listings</h2>
+       <Link className="absolute top-2 right-4" to='/job'>Create job</Link>
       {data.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.map((item) => (

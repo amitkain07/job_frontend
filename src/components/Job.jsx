@@ -34,7 +34,7 @@ const Job = () => {
   };
   
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className=" relative flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
           Add Job
@@ -91,6 +91,8 @@ const Job = () => {
           </button>
         </form>
       </div>
+      <Link  className='absolute top-2 right-4' to='/dashboard'
+      </Link>
     </div>
   );
 };

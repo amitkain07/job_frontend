@@ -67,7 +67,10 @@ const Home = () => {
           ))}
         </div>
       ) : (
+      <div className="relative">
         <p className="text-center text-gray-500">No jobs found</p>
+        <Link className="absolute top-2 right-4" to='/job'>Create job</Link>
+        </div>
       )}
     </div>
   );
